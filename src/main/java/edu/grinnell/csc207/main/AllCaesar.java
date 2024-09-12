@@ -17,27 +17,24 @@ public class AllCaesar {
    * @param args first argument is encode/decode. second argument is the target string.
    */
   public static void main(String[] args) {
-    PrintWriter pen = new PrintWriter(System.err, true);
+    PrintWriter pen = new PrintWriter(System.out, true);
 
     if (args.length != 2) {
-      pen.println("Error: Incorrect number of parameters.");
-      return;
+      System.err.println("Error: Incorrect number of parameters.");
     } //If statement
 
     String mode = args[0];
     String str = args[1];
 
     if (!("encode".equals(mode) || "decode".equals(mode))) {
-      pen.printf("Error: Invalid option: \"%s\"."
+      System.err.printf("Error: Invalid option: \"%s\"."
           + "Valid options are \"encode\" or \"decode\".\n", mode);
-      return;
     } //If statement
 
     // Validate the second argument (only lowercase letters)
     for (char ch : str.toCharArray()) {
       if (!Character.isLowerCase(ch)) {
-        pen.println("Error: String contains characters other than lowercase letters.");
-        return;
+        System.err.println("Error: String contains characters other than lowercase letters.");
       } //If statement
     } //for loop
 
