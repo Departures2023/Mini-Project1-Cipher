@@ -18,13 +18,14 @@ public class AllCaesar {
    */
   public static void main(String[] args) {
     PrintWriter pen = new PrintWriter(System.err, true);
-    String mode = args[0];
-    String str = args[1];
 
     if (args.length != 2) {
       pen.println("Error: Incorrect number of parameters.");
       return;
     } //If statement
+
+    String mode = args[0];
+    String str = args[1];
 
     if (!("encode".equals(mode) || "decode".equals(mode))) {
       pen.printf("Error: Invalid option: \"%s\"."
@@ -43,9 +44,11 @@ public class AllCaesar {
     // Depending on the mode, either encode or decode the string for all 26 shifts
     for (char ch = 'a'; ch <= 'z'; ch++) {
       if ("encode".equals(mode)) {
-        pen.printf("n = %c: %s\n", ch, CipherUtils.caesarEncrypt(str, ch));
+        pen.printf("n = %c: %s\n\n", ch, CipherUtils.caesarEncrypt(str, ch));
+        //pen.println();
       } else {
-        pen.printf("n = %c: %s\n", ch, CipherUtils.caesarDecrypt(str, ch));
+        pen.printf("n = %c: %s\n\n", ch, CipherUtils.caesarDecrypt(str, ch));
+        //pen.println();
       } //If statement
     } //for loop
 
