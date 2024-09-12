@@ -17,15 +17,14 @@ public class Cipher {
    * @param args main function for the cipher class
    */
   public static void main(String[] args) {
-    PrintWriter pen = new PrintWriter(System.err, true);
+    PrintWriter pen = new PrintWriter(System.out, true);
     String mode = null;
     String type = null;
     String input = null;
     String key = null;
 
-    // Validate the number of arguments
     if (args.length != LENGTH) {
-      pen.println("Error: Incorrect number of parameters.");
+      System.err.println("Error: Incorrect number of parameters.");
       return;
     } //If statement
 
@@ -44,37 +43,49 @@ public class Cipher {
         if (input == null) {
           input = args[i]; // First non-dash argument is the string to encode/decode
         } else {
-          pen.println("Error: Input arguments not correct.");
+          System.err.println("Error: Input arguments not correct.");
           return;
         } //If statement
       } //If statement
     } //For loop
 
-    // Validate the arguments
     if (mode == null) {
-      pen.println("Error: Missing cipher mode (-encode or -decode).");
+      System.err.println("Error: Missing cipher mode (-encode or -decode).");
       return;
     } //If statement
     if (type == null) {
-      pen.println("Error: Missing cipher type (-caesar or -vigenere).");
+      System.err.println("Error: Missing cipher type (-caesar or -vigenere).");
       return;
     } //If statement
     if (input == null) {
-      pen.println("Error: Missing string for cipher.");
+      System.err.println("Error: Missing string for cipher.");
       return;
     } //If statement
 
-    if (key == null) {
-      pen.println("Error: Missing cipher key.");
+    if (key == null || key.equals("")) {
+      System.err.println("Error: Missing cipher key.");
       return;
     } //If statement
+
+    for (char ch : input.toCharArray()) {
+      if (!Character.isLowerCase(ch)) {
+        System.err.println("Error: String for encode/decode aren't all lowercase.");
+        return;
+      } //If statement
+    } //for loop
+
+    for (char ch : key.toCharArray()) {
+      if (!Character.isLowerCase(ch)) {
+        System.err.println("Error: Key is not all lowercase.");
+        return;
+      } //If statement
+    } //for loop
+
 
 
     String output = null;
-
-    // Validate the key length for Caesar cipher
     if (type.equals("caesar") && key.length() != 1) {
-      pen.println("Error: Caesar cipher key must be a single letter.");
+      System.err.println("Error: Caesar cipher key must be a single letter.");
       return;
     } else if (type.equals("caesar")) {
       if (mode.equals("encode")) {
@@ -91,9 +102,9 @@ public class Cipher {
     } //If statement
 
     if (output != null) {
-      pen.printf("The encoded/decoded string is: %s\n", output);
+      pen.printf(output);
     } else {
-      pen.println("Error: Your input shouldn't be nothing.");
+      System.err.println("Error: Your input shouldn't be nothing.");
     } //If statement
 
     pen.close();
